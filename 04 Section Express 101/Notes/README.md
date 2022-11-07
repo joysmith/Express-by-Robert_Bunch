@@ -1,25 +1,14 @@
-PARADIGM: REFERENCE DOCUMENT MENTALITY 
+> PARADIGM: "Open Book Exam" aka Reference module-docs mentality
 
+1.  What are the different kinds of http request<br>
+    [HTTP request methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods "mdn")
 
-1. 
+    <img src="Image%20notes/1%20kinds%20of%20http%20request%20.png" width="500">
+    <br>
+    <br>
 
-
-
-
-
-Notice:
-	-> 
-
-
-
-
-
-Tools:
-	
-
-
-
-COOL STUFF FOR INSPIRATION:
-	
-
-
+2.  How to serve static file from express server<br>
+    [Serving static files in Express
+    ](https://expressjs.com/en/starter/static-files.html "expressjs")
+    <br>
+    <br>

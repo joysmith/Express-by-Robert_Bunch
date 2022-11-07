@@ -1,0 +1,25 @@
+PARADIGM: REFERENCE DOCUMENT MENTALITY 
+
+
+1. 
+
+
+
+
+
+Notice:
+	-> 
+
+
+
+
+
+Tools:
+	
+
+
+
+COOL STUFF FOR INSPIRATION:
+	
+
+

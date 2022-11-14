@@ -57,7 +57,7 @@ app.put( "/", ( req, res ) => {});
    ](https://expressjs.com/en/4x/api.html#express.static "expressjs")
 
 ```
-app comes with a use method
+app comes with a use method to mount middlewares
 use takes 1 arg (right now):
 1. the middleware you want to run
 app.use(express.static('public'))

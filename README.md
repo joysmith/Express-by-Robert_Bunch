@@ -46,7 +46,7 @@
 3. Install express generator tool from terminal
 
 ```
-	npx express-generator
+	npm install -g express-generator
 ```
 
 4. Create express server with default ejs view engine

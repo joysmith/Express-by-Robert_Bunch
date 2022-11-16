@@ -81,10 +81,10 @@
 
     var createError = require('http-errors');
     var express = require('express');
-    var app = express();
+    var app = express();                //  1
 
-    const helmet = require('helmet')
-    app.use(helmet());
+    const helmet = require('helmet')    //  2
+    app.use(helmet());                  //  3
 
     var path = require('path');
     var cookieParser = require('cookie-parser');

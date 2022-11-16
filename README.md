@@ -75,7 +75,7 @@
    npm install helmet request  --save
 ```
 
-8. Place the module and use them in layout in following order
+8. Place the module and use the layout in following order
 
 ```
 

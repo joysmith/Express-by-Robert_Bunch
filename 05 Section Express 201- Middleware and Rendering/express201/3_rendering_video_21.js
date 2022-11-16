@@ -1,13 +1,13 @@
-const path = require('path')
+const path = require("path");
 
-const express = require('express');
+const express = require("express");
 const app = express();
 
-const helmet = require('helmet');
-app.use(helmet()) //MY BAD... HELMET ON... READY FOR BATTLE!
+const helmet = require("helmet");
+app.use(helmet()); //MY BAD... HELMET ON... READY FOR BATTLE!
 
 // serve up static files
-app.use(express.static('public'))
+app.use(express.static("public"));
 // parse json and urlencoded data into req.body
 app.use(express.json());
 app.use(express.urlencoded());
@@ -15,8 +15,8 @@ app.use(express.urlencoded());
 // app.set(), takes 2 args:
 // 1. key
 // 2. value
-app.set('view engine', 'ejs')
-app.set('views',path.join(__dirname, 'views'))
+app.set("view engine", "ejs"); // type of the file "ejs"
+app.set("views", path.join(__dirname, "views")); // location of the file "machine path"
 
 // 1. Express as we know it happens. This File.
 // 2. We define a view engine.
@@ -33,8 +33,8 @@ app.set('views',path.join(__dirname, 'views'))
 // 6. The final result of this process is a compiled product of the things the browser can read.
 // - HTML, JS, CSS.
 
-app.get('/',(req, res, next)=>{
-    res.render("index")
-})
+app.get("/", (req, res, next) => {
+  res.render("index"); // name of the file "index"
+});
 
-app.listen(3000)
+app.listen(3000);

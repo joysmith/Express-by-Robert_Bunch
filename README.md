@@ -61,9 +61,21 @@
 	express projectname
 ```
 
-5. Install other modules
+5.  Change directory to projectname from terminal
 
-6. Place the module and use them in layout in following order
+6.  Then run cmd from terminal to install dependencies
+
+```
+    npm install
+```
+
+7. (Optional) Install other modules
+
+```
+   npm install helmet request  --save
+```
+
+8. Place the module and use them in layout in following order
 
 ```
 
@@ -109,5 +121,8 @@
 
     module.exports = app;
 
+```
+
+```
 
 ```

@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>	Movie App </title>
-	<% include head %>
-</head>
-<body>
+  <head>
+    <title>Movie App</title>
 
-	<% include navbar %>
+    <!-- include head.ejs partial from view folder  -->
+    <!-- Include head means, go and fetch this partial
+	     it'll be just like taking this copying and pasting it right here  
+		 in place of include head ejs  -->
+    <% include head %>
+  </head>
+  <body>
+    <!-- include navbar.ejs partial from view folder -->
+    <% include navbar %>
 
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-12">
-				<h1></h1>
-			</div>
-				<div class="col-sm-12">
-	 
-			</div>
-		</div>
-	</div>
-</body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <h1></h1>
+        </div>
+        <div class="col-sm-12"></div>
+      </div>
+    </div>
+  </body>
 </html>

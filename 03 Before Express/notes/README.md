@@ -44,17 +44,31 @@
      <br>
      <br>
 
+7. How to do curl in Vs code Terminal
+
 ```
- all is a method, and it takes 2 args:
- 1. route
- 2. callback to run if the route is requested
-app.all("/", (req, res) => {
-  // res.send(`<h1>This is the home page</h1>`)
-});
+   curl -v www.google.com
 ```
 
+- <img src="image%20notes/11%20curl%20request.png" width="500">
+     <br>
+     <br>
+- Http message start line, request from curl client/browser to google server
+- <img src="image%20notes/12%20http%20msg%20start%20line.png" width="500">
+     <br>
+     <br>
+- Http message headers received from google server
+- <img src="image%20notes/13%20http%20msg%20headers.png" width="500">
+     <br>
+     <br>
+- Http body received from google server: Here is the text or binary stuff
+- <img src="image%20notes/14%20http%20msg%20body.png" width="500">
+     <br>
+     <br>
+   
    <br>
    <br>
+
 3. What are the different kinds of http verbs request<br>
    [HTTP request methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods "mdn")
 

@@ -1,7 +1,9 @@
+const { json } = require("express");
 var express = require("express");
 var router = express.Router();
 const request = require("request");
 
+// -------API CONFIGURATION-----------
 const apiKey = "1fb720b97cc13e580c2c35e1138f90f8";
 // const apiKey = '123456789';
 const apiBaseUrl = "http://api.themoviedb.org/3";
@@ -9,7 +11,9 @@ const apiBaseUrl = "http://api.themoviedb.org/3";
 const nowPlayingUrl = `${apiBaseUrl}/most_popular?api_key=${apiKey}`;
 const imageBaseUrl = "http://image.tmdb.org/t/p/w300";
 
+// Make available this imageBaseUrl to all paths
 router.use((req, res, next) => {
+  // add imageBaseUrl to res.local so it will available in all path
   res.locals.imageBaseUrl = imageBaseUrl;
   next();
 });
@@ -28,11 +32,13 @@ router.get("/", function (req, res, next) {
     // console.log("========The response========")
     // console.log(response)
     console.log(movieData);
+
+    // How to convert http string messeage into json schema
     const parsedData = JSON.parse(movieData);
     // res.json(parsedData)
 
-    // Go and fetch then render on index.js
     res.render("index", {
+      // send the array of parsedData object to index.ejs inform to dict.
       parsedData: parsedData.results,
     });
   });

@@ -32,7 +32,7 @@
    <br>
    <br>
 
-6. Http can send following stuff, informs of packets to other browser
+6. Http can send following stuff, in-forms of packets to other browser from server
 
 - <img src="image%20notes/8%20http%20can%20send%20following%20.png" width="500">
      <br>
@@ -86,7 +86,7 @@
 
 # Notice
 
-1. The server will responce with its callback with http request to client
+1. The server will responce with its callback
 
 - the http module has a createServer method
 - takes 1 arg:

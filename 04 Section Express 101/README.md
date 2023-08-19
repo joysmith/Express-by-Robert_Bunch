@@ -119,4 +119,39 @@ console.log("The server is listening on port 3000...");
 
 ### 15. Serving Static Files in Express<a id='15'></a>
 
+- In 04 Section Express/express101/3_staticFiles.js
+- run cmd to initalize package.json
+
+```sh
+npm init
+npm i express --save
+nodemon 2_expressRouting
+```
+
+- some people uses only this much code to server entire frontend
+
+```js
+const express = require("express");
+const app = express();
+
+// app comes with a use method
+// use takes 1 arg (right now):
+// 1. the middleware you want to run
+app.use(express.static("public"));
+// 1000 points for Express!
+
+app.listen(3000);
+console.log("Server listening on port 3000...");
+```
+
 <br>
+
+### NOTICE:
+
+- all method accept all http method like get, post, delete, update, connect etc
+- '\*' route/path accept all route whatever you name xyz
+-
+
+```js
+app.all("*", (req, res) => {}
+```

@@ -117,8 +117,13 @@ npm install -g nodemon
 ### 9. Node/HTTP servers 101<a id='9'></a>
 
 - How to run nodeServer?
+- navigate to http module and run
 
-  - navigate to http module and run "nodemon nodeServer"
+```sh
+nodemon nodeServer
+```
+
+---
 
 - req object: this is what we know about the requesting machine, where http request comes in
 

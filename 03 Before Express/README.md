@@ -116,13 +116,19 @@ npm install -g nodemon
 
 ### 9. Node/HTTP servers 101<a id='9'></a>
 
+- How to run nodeServer?
+
+  - navigate to http module and run "nodemon nodeServer"
+
 - req object: this is what we know about the requesting machine, where http request comes in
 
--
+- How to create native http server using [http module](https://www.w3schools.com/nodejs/nodejs_http.asp "mdn")
 
 <br>
 
 ### 10. Serving up routes and static files in plain Node (no fun...)<a id='10'></a>
+
+- What are the most common [mime type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types "mdn") use in http headers
 
 <br>
 
@@ -131,30 +137,3 @@ npm install -g nodemon
 <br>
 
 ### 12. What is Networking from dev perspective<a id='12'></a>
-
-# Notice
-
-1. The server will responce with its callback
-
-- the http module has a createServer method
-- takes 1 arg:
-- 1. callback, callback, has 2 args: req, res
-- Rocket function (res, req => { Server do this })
-
-```
-const server = http.createServer((req, res)=>{
-
-     res.write('J home page');
-     res.end();
-
-});
-
-```
-
-- How to create native http server using [http module](https://www.w3schools.com/nodejs/nodejs_http.asp "mdn")
-
-<br>
-
-- What are the most common [mime type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types "mdn") use in http headers
-
-<br>

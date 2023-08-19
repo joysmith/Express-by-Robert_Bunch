@@ -12,14 +12,14 @@ const app = express();
 // 5. all - i will accept any method
 
 // Take 2 args:
-// 1. path
+// 1. path or route
 // 2. callback to run if an HTTP request that matchs THIS verb
 // is made to the path in #1
 // app.all('/',(req,res)=>{
 //     res.send(`<h1>Welcome to the home page!`)
 // })
 
-// Basic routing with diff. http request
+// Basic routing with diff. http method request
 app.get("/", (req, res) => {
   console.log(req);
   res.send(`<h1>Welcome to the home GET page!`);

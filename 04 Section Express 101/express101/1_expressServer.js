@@ -5,8 +5,10 @@ const path = require("path");
 
 // http is a native module -old code
 // const http = require('http'); -old code
+
 // express is a 3rd party module
 const express = require("express");
+
 // An "app" is the express function (createAppliction inside the Express module)
 // invoked and is an Express appliction
 const app = express();
@@ -22,6 +24,7 @@ app.all("/", (req, res) => {
   // read in Node.html
   console.log(path.join(__dirname + "/node.html"));
   res.sendFile(path.join(__dirname + "/node.html"));
+
   // res.send(`<h1>This is the home page</h1>`)
   // Express handles the end! Awesome!
 });

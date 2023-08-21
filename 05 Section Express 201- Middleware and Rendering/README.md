@@ -146,7 +146,7 @@ app.listen(3000);
 
 - In postman make a post request on "localhost:3000/ajax" route
   - select xx-www-form-urlencoded
-  - write name: rob in key value pair
+  - write "name: rob" in key value pair
 
 <br>
 
@@ -155,6 +155,53 @@ app.listen(3000);
 <br>
 
 ### 20. Chose your weapon - API or server side rendering<a id='20'></a>
+
+- What make up myspace server-concept<br>
+
+<img src="notes/1%20server%20concept.png" width="700">
+
+<br>
+
+---
+
+- Server side rendering VS APIs
+
+<img src="notes/5%20choose%20ur%20weapon.png" width="700">
+
+<img src="notes/2%20chose%20ur%20weapon.png" width="700">
+
+<br>
+
+---
+
+- Working of Server side rendering<br>
+  Building template every single time then sending to client<br>
+  In server side rendering we can use cookies, session
+
+- [My Space](https://myspace.com/discover/featured)
+
+- [Wikipedia](https://en.wikipedia.org/wiki/Express.js)
+
+<br>
+
+<img src="notes/4%20server%20side%20rendering.png" width="700">
+
+<img src="notes/6%20my%20space.png" width="700">
+
+<br>
+
+---
+
+- Working of JSON APIs<br>
+  Sending HTML,CSS,JS on first load, then update the DOM by JSON
+
+- [Facebook](https://www.facebook.com/)
+
+- [Amazon](https://www.amazon.com/)
+
+<br>
+
+<img src="notes/3%20JSON%20APIs.png" width="700">
 
 <br>
 
@@ -168,11 +215,66 @@ app.listen(3000);
 
 ### 23. Rendering in Express (with EJS) - Part1 of 2<a id='23'></a>
 
+- [ejs](https://ejs.co/)
+
+- In 05 Section Express 201- Middleware and Rendering/express201/3_rendering_video_21.js
+
+```js
+// 1. Express as we know it happens. This File.
+// 2. We define a view engine.
+// - EJS
+// - Mustache
+// - Handlebars
+// - Jade/Pug
+// 3. Inside one of our routes, we have a res.render
+// 4. We pass that res.render 2 things:
+// - the file we want to use.
+// - the data we want to send to that file
+// 5. Express uses the node module for our specified view engine and parses the file.
+// - that means, it takes the HTML/JS/CSS and combines it with whatever "node" there is in the file
+// 6. The final result of this process is a compiled product of the things the browser can read.
+// - HTML, JS, CSS.
+
+const path = require("path");
+
+const express = require("express");
+const app = express();
+
+const helmet = require("helmet");
+app.use(helmet()); //MY BAD... HELMET ON... READY FOR BATTLE!
+
+// serve up static files
+app.use(express.static("public"));
+// parse json and urlencoded data into req.body
+app.use(express.json());
+app.use(express.urlencoded());
+
+// app.set(), takes 2 args:
+// 1. key
+// 2. value
+app.set("view engine", "ejs"); // type of the file "ejs"
+app.set("views", path.join(__dirname, "views")); // location of the file "machine path"
+
+app.get("/", (req, res, next) => {
+  res.render("index"); // name of the file "index"
+});
+
+app.listen(3000);
+```
+
 <br>
 
 ### 24. Rendering in Express (with EJS) - Part2 of 2<a id='24'></a>
 
-<br>
+- In 05 Section Express 201- Middleware and Rendering/express201/4_ejsPractice_video_23.js
+
+```js
+
+```
+
+- [app.set()](https://expressjs.com/en/api.html#app.set)
+- [res.render()](https://expressjs.com/en/api.html#res.render)
+  <br>
 
 ### 25. Rendering Engine Option 2. Handlebars<a id='25'></a>
 
@@ -182,66 +284,11 @@ app.listen(3000);
 
 <br>
 
-29. How to simulate post request using postman<br>
-
-30. What make up server-concept<br>
-    <img src="notes/1%20server%20concept.png" width="700">
-    <br>
-    <br>
-
-31. Server side rendering VS APIs<br>
-    <img src="notes/5%20choose%20ur%20weapon.png" width="700">
-    <img src="notes/2%20chose%20ur%20weapon.png" width="700">
-    <br>
-    <br>
-
-32. Working of Server side rendering<br>
-    Building template every single time then sending to client<br>
-    In server side rendering we can use cookies, session
-
-    - [My Space](https://myspace.com/discover/featured)
-    - [Wikipedia](https://en.wikipedia.org/wiki/Express.js)
-      <br>
-      <img src="notes/4%20server%20side%20rendering.png" width="700">
-      <img src="notes/6%20my%20space.png" width="700">
-      <br>
-      <br>
-
-33. Working of JSON APIs<br>
-    Sending HTML,CSS,JS on first load, then update the DOM by JSON
-
-    - [Facebook](https://www.facebook.com/)
-    - [Amazon](https://www.amazon.com/)
-      <br>
-      <img src="notes/3%20JSON%20APIs.png" width="700">
-      <br>
-      <br>
-
-34. How to setup View engine<br>
-
-    1.  Express as we know it happens. This File.
-    2.  We define a view engine.
-        - EJS
-        - Mustache
-        - Handlebars
-        - Jade/Pug
-    3.  Inside one of our routes, we have a res.render
-    4.  We pass that res.render 2 things:
-        - the file we want to use.
-        - the data we want to send to that file
-    5.  Express uses the node module for our specified view engine and parses the file.
-        - that means, it takes the HTML/JS/CSS and combines it with whatever "node" there is in the file
-    6.  The final result of this process is a compiled product of the things the browser can read.
-        - HTML, JS, CSS.
-
-    <br>
-    <br>
-
 35. View Engine concept: What is EJS templating, and how to [install the ejs](https://ejs.co/) module ?
     <br>
     <br>
 
-36. [app.set()](https://expressjs.com/en/api.html#app.set), takes 2 args<br>
+36. , takes 2 args<br>
 
 - 1.  key
 - 2.  value
@@ -288,7 +335,7 @@ app.listen(3000);
 <br>
 10. How to pass data from res.render to ejs template file <br>
    
-   [res.render()](https://expressjs.com/en/api.html#res.render) <br>
+   <br>
     
    render() Takes 2 args
 

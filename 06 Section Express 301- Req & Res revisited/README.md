@@ -1,21 +1,75 @@
 > PARADIGM: "Open Book Exam" aka Reference module-docs mentality
 
-1. How to redirect user from post route by using [res.redirect()](https://expressjs.com/en/api.html#res.redirect) method after data submission
-   <br>
-   <br>
+#### 27. [Getting data from the request object - forms and cookies](#27)
 
-2. How to save data using cookie by [res.cookie()](https://expressjs.com/en/api.html#res.cookie) method <br>
-   <br>
-   <br>
+#### 28. [Getting data from the query string](#28)
 
-3. How to clear cookie data by [ res.clearCookie ?](https://expressjs.com/en/api.html#res.clearCookie)<br>
-   <br>
-   <br>
+#### 29. [Getting data from params (URL wildcards) - req.params and req.param()](#29)
 
-4. How to remove cookie data from chrom<br>
-   <img src="image%20notes/1%20how%20to%20delete%20cookie%20data.png" width="700">
-   <br>
-   <br>
+#### 30. [Sending files, and headers already sent!](#30)
+
+#### 31. [The Router](#31)
+
+#### 32. [The Express Generator](#32)
+
+#### 33. [STOP - Checklist Update and Short Review](#33)
+
+#### 34. [Don't fear the HTTP headers!!](#34)
+
+---
+
+<br>
+
+### 27. Getting data from the request object - forms and cookies<a id="27"></a>
+
+<br>
+
+### 28. Getting data from the query string<a id="28"></a>
+
+<br>
+
+### 29. Getting data from params (URL wildcards) - req.params and req.param()<a id="29"></a>
+
+<br>
+
+### 30. Sending files, and headers already sent!<a id="30"></a>
+
+<br>
+
+### 31. The Router<a id="31"></a>
+
+<br>
+
+### 32. The Express Generator<a id="32"></a>
+
+<br>
+
+### 33. STOP - Checklist Update and Short Review<a id="33"></a>
+
+<br>
+
+### 34. Don't fear the HTTP headers!!<a id="34"></a>
+
+<br>
+
+---
+
+35. How to redirect user from post route by using [res.redirect()](https://expressjs.com/en/api.html#res.redirect) method after data submission
+    <br>
+    <br>
+
+36. How to save data using cookie by [res.cookie()](https://expressjs.com/en/api.html#res.cookie) method <br>
+    <br>
+    <br>
+
+37. How to clear cookie data by [ res.clearCookie ?](https://expressjs.com/en/api.html#res.clearCookie)<br>
+    <br>
+    <br>
+
+38. How to remove cookie data from chrom<br>
+    <img src="notes/1%20how%20to%20delete%20cookie%20data.png" width="700">
+    <br>
+    <br>
 
 ---
 
@@ -26,19 +80,19 @@
 - Everything before me is the part of actual path of the domain
 - we can pass multiple query by using "&" character
 - The query string is where you put insecure data
-  <img src="image%20notes/4%20url.png" width="700">
+  <img src="notes/4%20url.png" width="700">
   <br>
   <br>
 
-   <img src="image%20notes/6%20google%20url.png" width="700">
+   <img src="notes/6%20google%20url.png" width="700">
    <br>
    <br>
    
-   <img src="image%20notes/5%20query%20string%20.png" width="700">
+   <img src="notes/5%20query%20string%20.png" width="700">
    <br>
    <br>
 
-   <img src="image%20notes/7%20google%20query%20string.png" width="700">
+   <img src="notes/7%20google%20query%20string.png" width="700">
    <br>
    <br>
 
@@ -56,11 +110,11 @@
 - In a route, anytime something has a : in front it is a wildcard!
 - wildcard, will match anything in that slot
 
-<img src="image%20notes/8%20param.png" width="700">
+<img src="notes/8%20param.png" width="700">
   <br>
   <br>
 
-<img src="image%20notes/9%20Use%20of%20param%20in%20espn%20website.png" width="700">
+<img src="notes/9%20Use%20of%20param%20in%20espn%20website.png" width="700">
    <br>
    <br>
 
@@ -105,9 +159,9 @@ app.get("/statement", (req, res, next) => {
   );
 ```
 
-<img src="image%20notes/10%20click%20on%20download%20link.png" width="700">
+<img src="notes/10%20click%20on%20download%20link.png" width="700">
 <br>
-<img src="image%20notes/10%20download.png" width="700">
+<img src="notes/10%20download.png" width="700">
 <br>
 <br>
 
@@ -123,7 +177,7 @@ app.get("/statement", (req, res, next) => {
 });
 ```
 
-<img src="image%20notes/12%20render%20image%20on%20browser.png" width="700">
+<img src="notes/12%20render%20on%20browser.png" width="700">
 <br>
 <br>
 
@@ -132,7 +186,7 @@ app.get("/statement", (req, res, next) => {
     <br>
 
 14. How to do empty cahce and Hard reseting by opening dev tools<br>
-    <img src="image%20notes/2%20How%20to%20do%20empty%20cache%20and%20hard%20resting.png" width="700">
+    <img src="notes/2%20How%20to%20do%20empty%20cache%20and%20hard%20resting.png" width="700">
     <br>
     <br>
 
@@ -142,24 +196,24 @@ app.get("/statement", (req, res, next) => {
 
 - Different res. methods to transfer http message
 
-  - <img src="image%20notes/13%20res%20method%20on%20express.png" width="700">
+  - <img src="notes/13%20res%20method%20on%20express.png" width="700">
 
 - Express server is doing some behind the scene work so what we are not doing
 
-  - <img src="image%20notes/14%20what%20we%20are%20not%20doing%20.png" width="700">
+  - <img src="notes/14%20what%20we%20are%20not%20doing%20.png" width="700">
 
 - Express server send http message to browser
 
-  - <img src="image%20notes/15%20HTTP%20message.png" width="700">
+  - <img src="notes/15%20HTTP%20message.png" width="700">
 
 - Process of Http message transfering
-- <img src="image%20notes/16%20connection%20bw%20clent%20and%20server.png" width="700">
+- <img src="notes/16%20connection%20bw%20clent%20and%20server.png" width="700">
 
 <br>
 <br>
 
 16. How to makes notes<br>
-    <img src="image%20notes/3%20How%20to%20write%20docx.png" width="700">
+    <img src="notes/3%20How%20to%20write%20docx.png" width="700">
     <br>
     <br>
 

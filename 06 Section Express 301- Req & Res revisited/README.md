@@ -22,17 +22,536 @@
 
 ### 27. Getting data from the request object - forms and cookies<a id="27"></a>
 
+- In 06 Section Express 301- Req & Res revisited/express301/loginSite.js
+- How to redirect user from post route by using [res.redirect()](https://expressjs.com/en/api.html#res.redirect) method after data submission
+- How to save data using cookie by [res.cookie()](https://expressjs.com/en/api.html#res.cookie) method
+- How to clear cookie data by [ res.clearCookie ?](https://expressjs.com/en/api.html#res.clearCookie)
+- How to remove cookie data from chrom
+
+<img src="notes/1%20how%20to%20delete%20cookie%20data.png" width="700">
+
+```js
+const path = require("path");
+
+const express = require("express");
+const app = express();
+
+const cookieParser = require("cookie-parser");
+
+const helmet = require("helmet");
+app.use(helmet());
+
+app.use(express.static("public"));
+//for any data that comes in will be add in req.body
+app.use(express.json());
+//for any data that comes in will be add in req.body
+app.use(express.urlencoded());
+
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+
+app.get("/", (req, res, next) => {
+  res.send("Sanity Check");
+});
+
+app.listen(3000);
+console.log("Server listening on port 3000...");
+```
+
+- Change to current working dir and run cmd
+
+```sh
+npm init
+npm install express --save
+npm install ejs --save
+npm install helmet --save
+npm install cookie-parser --save
+nodemon loginSite.js
+
+```
+
+---
+
+- In 06 Section/express301/loginSite.js,
+
+```js
+const path = require("path");
+
+const express = require("express");
+const app = express();
+
+const cookieParser = require("cookie-parser");
+
+const helmet = require("helmet");
+app.use(helmet());
+
+app.use(express.static("public"));
+//for any data that comes in will be add in req.body
+app.use(express.json());
+//for any data that comes in will be add in req.body
+app.use(express.urlencoded());
+app.use(cookieParser());
+
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+
+app.get("/", (req, res, next) => {
+  res.send("Sanity Check");
+});
+
+app.get("/login", (req, res, next) => {
+  res.render("login");
+});
+
+// this route purpose is to only submit data, you will never see it on browser
+app.post("/process_login", (req, res, next) => {
+  // req.body is made by urlencoded, which parses the http message for sent data!
+  const password = req.body.password;
+  const username = req.body.username;
+
+  // check the db to see if user credentials are valid
+  // if they are valid...
+  // - save their username in a cookie
+  // - is send them to the welcome page
+  if (password === "x") {
+    // res.cookie takes 2 args:
+    // 1. name of the cookie
+    // 2. value to set it to
+    res.cookie("username", username);
+
+    // res.redirect takes 1 arg:
+    // 1. Where to send the brower
+    res.redirect("/welcome");
+  } else {
+    // The "?" is a special character in a URL
+    res.redirect("/login?msg=fail&test=hello");
+  }
+  // res.json(req.body)
+});
+
+app.get("/welcome", (req, res, next) => {
+  // req.cookies object will have a property for every named cookie
+  // that has been set.
+  res.render("welcome", {
+    username: req.cookies.username,
+  });
+});
+
+app.get("/logout", (req, res, next) => {
+  // res.clearCookie takes 1 arg:
+  // 1. Cookie to clear (by name)
+  res.clearCookie("username");
+  res.redirect("/login");
+});
+
+app.listen(3000);
+console.log("Server listening on port 3000...");
+```
+
 <br>
 
 ### 28. Getting data from the query string<a id="28"></a>
+
+- In 06 Section/express301/loginSite.js,
+- How to use [req.query ](https://expressjs.com/en/api.html#req.query) ?
+
+```js
+const path = require("path");
+
+const express = require("express");
+const app = express();
+
+const cookieParser = require("cookie-parser");
+
+const helmet = require("helmet");
+app.use(helmet());
+
+app.use(express.static("public"));
+//for any data that comes in will be add in req.body
+app.use(express.json());
+//for any data that comes in will be add in req.body
+app.use(express.urlencoded());
+app.use(cookieParser());
+
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+
+app.use((req, res, next) => {
+  if (req.query.msg === "fail") {
+    res.locals.msg = `Sorry. This username and password combinatino does not exist.`;
+  } else {
+    res.locals.msg = ``;
+  }
+
+  // Send me on to the next piece of middleware!
+  next();
+});
+
+app.get("/", (req, res, next) => {
+  res.send("Sanity Check");
+});
+
+app.get("/login", (req, res, next) => {
+  // the req object has a query property in Express
+  // req.query is an object, wiht a property of every key in the query string
+  // The query string is where you put insecure data
+  // console.log(req.query)
+  const msg = req.query.msg;
+
+  if (msg === "fail") {
+    //run some other function...
+  }
+  res.render("login");
+});
+
+// this route purpose is to only submit data, you will never see it on browser
+app.post("/process_login", (req, res, next) => {
+  // req.body is made by urlencoded, which parses the http message for sent data!
+  const password = req.body.password;
+  const username = req.body.username;
+
+  // check the db to see if user credentials are valid
+  // if they are valid...
+  // - save their username in a cookie
+  // - is send them to the welcome page
+  if (password === "x") {
+    // res.cookie takes 2 args:
+    // 1. name of the cookie
+    // 2. value to set it to
+    res.cookie("username", username);
+
+    // res.redirect takes 1 arg:
+    // 1. Where to send the brower
+    res.redirect("/welcome");
+  } else {
+    // The "?" is a special character in a URL
+    res.redirect("/login?msg=fail&test=hello");
+  }
+  // res.json(req.body)
+});
+
+app.get("/welcome", (req, res, next) => {
+  // req.cookies object will have a property for every named cookie
+  // that has been set.
+  res.render("welcome", {
+    username: req.cookies.username,
+  });
+});
+
+app.get("/logout", (req, res, next) => {
+  // res.clearCookie takes 1 arg:
+  // 1. Cookie to clear (by name)
+  res.clearCookie("username");
+  res.redirect("/login");
+});
+
+app.listen(3000);
+console.log("Server listening on port 3000...");
+```
 
 <br>
 
 ### 29. Getting data from params (URL wildcards) - req.params and req.param()<a id="29"></a>
 
+- In 06 Section/express301/loginSite.js,
+- [How to use req.params property](https://expressjs.com/en/4x/api.html#req.params)
+- How to use [ req.params()](https://expressjs.com/en/4x/api.html#req.param)
+
+```js
+const path = require("path");
+
+const express = require("express");
+const app = express();
+
+const cookieParser = require("cookie-parser");
+
+const helmet = require("helmet");
+app.use(helmet());
+
+app.use(express.static("public"));
+//for any data that comes in will be add in req.body
+app.use(express.json());
+//for any data that comes in will be add in req.body
+app.use(express.urlencoded());
+app.use(cookieParser());
+
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+
+app.use((req, res, next) => {
+  if (req.query.msg === "fail") {
+    res.locals.msg = `Sorry. This username and password combinatino does not exist.`;
+  } else {
+    res.locals.msg = ``;
+  }
+
+  // Send me on to the next piece of middleware!
+  next();
+});
+
+app.get("/", (req, res, next) => {
+  res.send("Sanity Check");
+});
+
+app.get("/login", (req, res, next) => {
+  // the req object has a query property in Express
+  // req.query is an object, wiht a property of every key in the query string
+  // The query string is where you put insecure data
+  // console.log(req.query)
+  const msg = req.query.msg;
+
+  if (msg === "fail") {
+    //run some other function...
+  }
+  res.render("login");
+});
+
+// this route purpose is to only submit data, you will never see it on browser
+app.post("/process_login", (req, res, next) => {
+  // req.body is made by urlencoded, which parses the http message for sent data!
+  const password = req.body.password;
+  const username = req.body.username;
+
+  // check the db to see if user credentials are valid
+  // if they are valid...
+  // - save their username in a cookie
+  // - is send them to the welcome page
+  if (password === "x") {
+    // res.cookie takes 2 args:
+    // 1. name of the cookie
+    // 2. value to set it to
+    res.cookie("username", username);
+
+    // res.redirect takes 1 arg:
+    // 1. Where to send the brower
+    res.redirect("/welcome");
+  } else {
+    // The "?" is a special character in a URL
+    res.redirect("/login?msg=fail&test=hello");
+  }
+  // res.json(req.body)
+});
+
+app.get("/welcome", (req, res, next) => {
+  // req.cookies object will have a property for every named cookie
+  // that has been set.
+  res.render("welcome", {
+    username: req.cookies.username,
+  });
+});
+
+// app.param() - takes 2 args:
+// 1. param to look for in the route
+// 2. the callback to run (with the usuals)
+app.param("id", (req, res, next, id) => {
+  console.log("Params called:", id);
+  // if id has something to do with stories...
+  // if id has something to do with blog...
+  next();
+});
+
+// app.get('/user/:uid',...)
+// app.get('/user/admin/:uid',...)
+// app.get('/user/profile/:uid',...)
+
+// in a route, anytime something has a : in front it is a wildcard!
+// wildcard, will match anything in that slot
+app.get("/story/:id", (req, res, next) => {
+  // the req.params object always exists
+  // it will have a property for each wildcard in the route
+  res.send(`<h1>Story ${req.params.storyId}</h1>`);
+  // res.send('<h1>Story 1</h1>')
+});
+
+// THIS WILL NEVER RUN, because it matches above (without next())
+// app.get('/story/:blogId',(req, res, next)=>{
+//     // the req.params object always exists
+//     // it will have a property for each wildcard in the route
+//     res.send(`<h1>Story ${req.params.storyId}</h1>`)
+//     // res.send('<h1>Story 1</h1>')
+// })
+
+app.get("/story/:storyId/:link", (req, res, next) => {
+  // the req.params object always exists
+  // it will have a property for each wildcard in the route
+  res.send(`<h1>Story ${req.params.storyId} - ${req.params.link}</h1>`);
+  // res.send('<h1>Story 1</h1>')
+});
+
+// --- Hard to manage ---
+// app.get('/story/1',(req, res, next)=>{
+//     res.send('<h1>Story 1</h1>')
+// })
+
+// app.get('/story/2',(req, res, next)=>{
+//     res.send('<h1>Story 2</h1>')
+// })
+
+// app.get('/story/3',(req, res, next)=>{
+//     res.send('<h1>Story 3</h1>')
+// })
+
+app.get("/logout", (req, res, next) => {
+  // res.clearCookie takes 1 arg:
+  // 1. Cookie to clear (by name)
+  res.clearCookie("username");
+  res.redirect("/login");
+});
+
+app.listen(3000);
+console.log("Server listening on port 3000...");
+```
+
 <br>
 
 ### 30. Sending files, and headers already sent!<a id="30"></a>
+
+- In 06 Section/express301/loginSite.js,
+
+```js
+const path = require("path");
+
+const express = require("express");
+const app = express();
+
+const cookieParser = require("cookie-parser");
+
+const helmet = require("helmet");
+app.use(helmet());
+
+app.use(express.static("public"));
+//for any data that comes in will be add in req.body
+app.use(express.json());
+//for any data that comes in will be add in req.body
+app.use(express.urlencoded());
+app.use(cookieParser());
+
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+
+app.use((req, res, next) => {
+  if (req.query.msg === "fail") {
+    res.locals.msg = `Sorry. This username and password combinatino does not exist.`;
+  } else {
+    res.locals.msg = ``;
+  }
+
+  // Send me on to the next piece of middleware!
+  next();
+});
+
+app.get("/", (req, res, next) => {
+  res.send("Sanity Check");
+});
+
+app.get("/login", (req, res, next) => {
+  // the req object has a query property in Express
+  // req.query is an object, wiht a property of every key in the query string
+  // The query string is where you put insecure data
+  // console.log(req.query)
+  const msg = req.query.msg;
+
+  if (msg === "fail") {
+    //run some other function...
+  }
+  res.render("login");
+});
+
+// this route purpose is to only submit data, you will never see it on browser
+app.post("/process_login", (req, res, next) => {
+  // req.body is made by urlencoded, which parses the http message for sent data!
+  const password = req.body.password;
+  const username = req.body.username;
+
+  // check the db to see if user credentials are valid
+  // if they are valid...
+  // - save their username in a cookie
+  // - is send them to the welcome page
+  if (password === "x") {
+    // res.cookie takes 2 args:
+    // 1. name of the cookie
+    // 2. value to set it to
+    res.cookie("username", username);
+
+    // res.redirect takes 1 arg:
+    // 1. Where to send the brower
+    res.redirect("/welcome");
+  } else {
+    // The "?" is a special character in a URL
+    res.redirect("/login?msg=fail&test=hello");
+  }
+  // res.json(req.body)
+});
+
+app.get("/welcome", (req, res, next) => {
+  // req.cookies object will have a property for every named cookie
+  // that has been set.
+  res.render("welcome", {
+    username: req.cookies.username,
+  });
+});
+
+// app.param() - takes 2 args:
+// 1. param to look for in the route
+// 2. the callback to run (with the usuals)
+app.param("id", (req, res, next, id) => {
+  console.log("Params called:", id);
+  // if id has something to do with stories...
+  // if id has something to do with blog...
+  next();
+});
+
+// app.get('/user/:uid',...)
+// app.get('/user/admin/:uid',...)
+// app.get('/user/profile/:uid',...)
+
+// in a route, anytime something has a : in front it is a wildcard!
+// wildcard, will match anything in that slot
+app.get("/story/:id", (req, res, next) => {
+  // the req.params object always exists
+  // it will have a property for each wildcard in the route
+  res.send(`<h1>Story ${req.params.storyId}</h1>`);
+  // res.send('<h1>Story 1</h1>')
+});
+
+// THIS WILL NEVER RUN, because it matches above (without next())
+// app.get('/story/:blogId',(req, res, next)=>{
+//     // the req.params object always exists
+//     // it will have a property for each wildcard in the route
+//     res.send(`<h1>Story ${req.params.storyId}</h1>`)
+//     // res.send('<h1>Story 1</h1>')
+// })
+
+app.get("/story/:storyId/:link", (req, res, next) => {
+  // the req.params object always exists
+  // it will have a property for each wildcard in the route
+  res.send(`<h1>Story ${req.params.storyId} - ${req.params.link}</h1>`);
+  // res.send('<h1>Story 1</h1>')
+});
+
+// --- Hard to manage ---
+// app.get('/story/1',(req, res, next)=>{
+//     res.send('<h1>Story 1</h1>')
+// })
+
+// app.get('/story/2',(req, res, next)=>{
+//     res.send('<h1>Story 2</h1>')
+// })
+
+// app.get('/story/3',(req, res, next)=>{
+//     res.send('<h1>Story 3</h1>')
+// })
+
+app.get("/logout", (req, res, next) => {
+  // res.clearCookie takes 1 arg:
+  // 1. Cookie to clear (by name)
+  res.clearCookie("username");
+  res.redirect("/login");
+});
+
+app.listen(3000);
+console.log("Server listening on port 3000...");
+```
 
 <br>
 
@@ -54,69 +573,10 @@
 
 ---
 
-35. How to redirect user from post route by using [res.redirect()](https://expressjs.com/en/api.html#res.redirect) method after data submission
-    <br>
-    <br>
-
-36. How to save data using cookie by [res.cookie()](https://expressjs.com/en/api.html#res.cookie) method <br>
-    <br>
-    <br>
-
-37. How to clear cookie data by [ res.clearCookie ?](https://expressjs.com/en/api.html#res.clearCookie)<br>
-    <br>
-    <br>
-
-38. How to remove cookie data from chrom<br>
-    <img src="notes/1%20how%20to%20delete%20cookie%20data.png" width="700">
-    <br>
+38. <br>
     <br>
 
 ---
-
-5.How to pass data through url using query string<br>
-
-- The "?" mark is a special character in URL
-- The ? mark says everything after me is the part of query string and
-- Everything before me is the part of actual path of the domain
-- we can pass multiple query by using "&" character
-- The query string is where you put insecure data
-  <img src="notes/4%20url.png" width="700">
-  <br>
-  <br>
-
-   <img src="notes/6%20google%20url.png" width="700">
-   <br>
-   <br>
-   
-   <img src="notes/5%20query%20string%20.png" width="700">
-   <br>
-   <br>
-
-   <img src="notes/7%20google%20query%20string.png" width="700">
-   <br>
-   <br>
-
-6. How to use [req.query ](https://expressjs.com/en/api.html#req.query) ?
-   <br>
-   <br>
-
----
-
-7. How to send data from url using params
-
-- [How to use req.params property](https://expressjs.com/en/4x/api.html#req.params) ?
-- How to use [ req.params()](https://expressjs.com/en/4x/api.html#req.param) ?
-- The other way of passing data through url, is by params
-- In a route, anytime something has a : in front it is a wildcard!
-- wildcard, will match anything in that slot
-
-<img src="notes/8%20param.png" width="700">
-  <br>
-  <br>
-
-<img src="notes/9%20Use%20of%20param%20in%20espn%20website.png" width="700">
-   <br>
-   <br>
 
 ---
 

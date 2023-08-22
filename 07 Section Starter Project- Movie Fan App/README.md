@@ -109,7 +109,8 @@ nodemon
 
 ---
 
-- FRONTEND setup
+##### FRONTEND setup
+
 - In public/stylesheets/style.css copy & paste style from resource
 
 ```css
@@ -160,7 +161,7 @@ a {
 
 ---
 
-- In views folder create head.ejs, copy & paste header from resource
+- In views folder create "head.ejs", copy & paste header from resource
 
 ```html
 <!-- boothstrap cdn -->
@@ -223,7 +224,7 @@ a {
 
 ---
 
-- In views folder create navbar.ejs, copy & paste navbar from resource
+- In views folder create "navbar.ejs", copy & paste navbar from resource
 
 ```html
 <!-- Boothstrap navbar from w3skool -->
@@ -269,7 +270,7 @@ a {
 
 ---
 
-- In views folder create single-movie.ejs, copy & paste template from resource
+- In views folder create "single-movie.ejs", copy & paste template from resource
 
 ```html
 <% include head %>
@@ -333,6 +334,23 @@ a {
 
 </body>
 </html>
+```
+
+---
+
+- In routes/index.js, remove 2nd arg from render()
+
+```js
+var express = require("express");
+var router = express.Router();
+
+/* GET home page. */
+router.get("/", function (req, res, next) {
+  // res.render("index", { title: "Express" }); ---remove { title: "Express" }
+  res.render("index");
+});
+
+module.exports = router;
 ```
 
 ---
